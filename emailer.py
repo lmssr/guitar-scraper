@@ -1,12 +1,14 @@
+# -*- coding: utf-8 -*-
+
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 def send_email(guitars):
-    from_email = 'dailyguitars.com'
+    from_email = 'luc.mosser86@gmail.com'
     to_email = 'luc.mosser86@gmail.com'
-    password = 'ton_mot_de_passe'
-    
+    password = 'eihe rmpl nsdd uydp'  # Utilise ton mot de passe d'application ou ton mot de passe Gmail
+
     msg = MIMEMultipart()
     msg['From'] = from_email
     msg['To'] = to_email
@@ -18,8 +20,15 @@ def send_email(guitars):
 
     msg.attach(MIMEText(html, 'html'))
 
-    server = smtplib.SMTP('smtp.example.com', 587)
-    server.starttls()
-    server.login(from_email, password)
-    server.send_message(msg)
-    server.quit()
+    try:
+        print("Connexion au serveur SMTP...")
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        print("Connexion...")
+        server.login(from_email, password)
+        print("Envoi de l'email...")
+        server.send_message(msg)
+        server.quit()
+        print("Email envoyé avec succès!")
+    except Exception as e:
+        print(f"Échec de l'envoi de l'email: {e}")
